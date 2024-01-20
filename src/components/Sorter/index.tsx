@@ -1,7 +1,9 @@
 const Sorter = () => {
   return (
     <>
-      <div>Hello</div>
+      <button>
+        <span className="material-symbols-outlined">sort</span>
+      </button>
     </>
   );
 };

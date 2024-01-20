@@ -1,8 +1,11 @@
+import styles from "./infobox.module.css";
 
 const Infobox = () => {
   return (
-    <div>Infobox</div>
-  )
-}
+    <div className={styles.container}>
+      {false ? null : <div className={styles.nomovie}>No movie selected!</div>}
+    </div>
+  );
+};
 
-export default Infobox
+export default Infobox;

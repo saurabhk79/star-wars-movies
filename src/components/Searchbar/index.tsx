@@ -1,10 +1,11 @@
+import styles from "./searchbar.module.css";
 
 const Searchbar = () => {
   return (
-    <div>
-        <input type="text" />
-    </div>
-  )
-}
+    <>
+      <input type="text" placeholder="Search a movie..." className={styles.searchbar} />
+    </>
+  );
+};
 
-export default Searchbar
+export default Searchbar;
