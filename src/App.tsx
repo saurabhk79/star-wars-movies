@@ -37,7 +37,7 @@ const App = () => {
       setFilteredMoviesList(moviesList);
     }
     const filteredMovies = moviesList.filter((mov) =>
-      mov.title.includes(text)
+      mov.title.toLowerCase().includes(text)
     );
 
     setFilteredMoviesList(filteredMovies);
