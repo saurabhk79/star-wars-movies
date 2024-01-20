@@ -43,11 +43,23 @@ const App = () => {
     setFilteredMoviesList(filteredMovies);
   };
 
+  const handleSort = (sortBy: string) => {
+    const sortedList: Movie[] = [...filteredMoviesList];
+
+    if (sortBy === "date") {
+      sortedList.sort((a, b) => new Date(a.release_date).getTime() - new Date(b.release_date).getTime());
+    } else if (sortBy === "episode_id") {
+      sortedList.sort((a, b) => a.episode_id - b.episode_id);
+    }
+
+    setFilteredMoviesList(sortedList);
+  };
+
   return (
     <div className={styles.app}>
       <div className={styles.topbar}>
         <Searchbar handleSearchMovie={handleSearchMovie} />
-        <Sorter />
+        <Sorter onSort={handleSort} />
       </div>
 
       <Listbox
