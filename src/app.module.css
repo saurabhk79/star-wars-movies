@@ -10,3 +10,11 @@
 
     margin-top: 8px;
 }
+
+.loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100vh;
+}

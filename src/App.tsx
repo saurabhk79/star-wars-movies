@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { ClimbingBoxLoader } from "react-spinners";
+
 import styles from "./app.module.css";
 import Infobox from "./components/Infobox";
 import Listbox from "./components/Listbox";
@@ -14,7 +16,11 @@ const App = () => {
     isSelected: false,
   });
 
+  const [loading, setLoading] = useState<boolean>(true);
+
   useEffect(() => {
+    setLoading(true);
+
     const getMoviesList = async () => {
       const res = await fetch("https://swapi.dev/api/films/?format=json");
       const data = await res.json();
@@ -24,6 +30,14 @@ const App = () => {
     };
 
     getMoviesList();
+
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   const handleSelectMovie = (id: number) => {
@@ -47,7 +61,11 @@ const App = () => {
     const sortedList: Movie[] = [...filteredMoviesList];
 
     if (sortBy === "date") {
-      sortedList.sort((a, b) => new Date(a.release_date).getTime() - new Date(b.release_date).getTime());
+      sortedList.sort(
+        (a, b) =>
+          new Date(a.release_date).getTime() -
+          new Date(b.release_date).getTime()
+      );
     } else if (sortBy === "episode_id") {
       sortedList.sort((a, b) => a.episode_id - b.episode_id);
     }
@@ -56,19 +74,27 @@ const App = () => {
   };
 
   return (
-    <div className={styles.app}>
-      <div className={styles.topbar}>
-        <Searchbar handleSearchMovie={handleSearchMovie} />
-        <Sorter onSort={handleSort} />
-      </div>
+    <>
+      {loading ? (
+        <div className={styles.loader}>
+          <ClimbingBoxLoader />
+        </div>
+      ) : (
+        <div className={styles.app}>
+          <div className={styles.topbar}>
+            <Searchbar handleSearchMovie={handleSearchMovie} />
+            <Sorter onSort={handleSort} />
+          </div>
 
-      <Listbox
-        list={filteredMoviesList}
-        handleSelectMovie={handleSelectMovie}
-      />
+          <Listbox
+            list={filteredMoviesList}
+            handleSelectMovie={handleSelectMovie}
+          />
 
-      <Infobox selectedMovie={selectedMovie} />
-    </div>
+          <Infobox selectedMovie={selectedMovie} />
+        </div>
+      )}
+    </>
   );
 };
 
