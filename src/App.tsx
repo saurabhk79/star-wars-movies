@@ -1,12 +1,22 @@
-import styles from "./app.module.css"
-import Searchbar from "./components/Searchbar"
+import styles from "./app.module.css";
+import Infobox from "./components/Infobox";
+import Listbox from "./components/Listbox";
+import Searchbar from "./components/Searchbar";
+import Sorter from "./components/Sorter";
 
-const App = ()=> {
+const App = () => {
   return (
     <div className={styles.app}>
-      <Searchbar />
-    </div>
-  )
-}
+      <div className={styles.topbar}>
+        <Searchbar />
+        <Sorter />
+      </div>
 
-export default App
+      <Listbox />
+
+      <Infobox />
+    </div>
+  );
+};
+
+export default App;
