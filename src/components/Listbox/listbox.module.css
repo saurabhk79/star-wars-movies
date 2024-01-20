@@ -3,7 +3,28 @@
     overflow-y: auto;
     border: 1px solid #888;
     border-radius: 4px;
-    padding: 8px;
+    padding: 16px;
 
     margin: 16px 0;
+}
+
+.moviecard {
+    margin: 8px 0;
+    padding: 12px;
+    border-radius: 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.moviecard:hover {
+    background-color: rgb(136, 136, 136, 0.3);
+}
+
+.episode {
+    color: #888;
+    font-weight: bold;
+    margin-right: 16px;
 }
