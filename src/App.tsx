@@ -8,7 +8,6 @@ import Sorter from "./components/Sorter";
 import { Movie, SelectedMovie } from "./interfaces";
 
 const App = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [moviesList, setMoviesList] = useState<Movie[]>([]);
   const [filteredMoviesList, setFilteredMoviesList] = useState<Movie[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<SelectedMovie>({
@@ -33,14 +32,28 @@ const App = () => {
     setSelectedMovie({ isSelected: true, movie: movie });
   };
 
+  const handleSearchMovie = (text: string) => {
+    if (!text.length) {
+      setFilteredMoviesList(moviesList);
+    }
+    const filteredMovies = moviesList.filter((mov) =>
+      mov.title.includes(text)
+    );
+
+    setFilteredMoviesList(filteredMovies);
+  };
+
   return (
     <div className={styles.app}>
       <div className={styles.topbar}>
-        <Searchbar />
+        <Searchbar handleSearchMovie={handleSearchMovie} />
         <Sorter />
       </div>
 
-      <Listbox list={filteredMoviesList} handleSelectMovie={handleSelectMovie} />
+      <Listbox
+        list={filteredMoviesList}
+        handleSelectMovie={handleSelectMovie}
+      />
 
       <Infobox selectedMovie={selectedMovie} />
     </div>
